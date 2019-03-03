@@ -1,9 +1,30 @@
-# RefineDet Implementation NVCaffe ver.   
-## Single-Shot Refinement Neural Network for Object Detection
+# Single-Shot Refinement Neural Network for Object Detection(RefineDet) NVCaffe ver. 
 
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
 
-By [Shifeng Zhang](http://www.cbsr.ia.ac.cn/users/sfzhang/), [Longyin Wen](http://www.cbsr.ia.ac.cn/users/lywen/), [Xiao Bian](https://sites.google.com/site/cvbian/), [Zhen Lei](http://www.cbsr.ia.ac.cn/users/zlei/), [Stan Z. Li](http://www.cbsr.ia.ac.cn/users/szli/).
+By [Shifeng Zhang](http://www.cbsr.ia.ac.cn/users/sfzhang/), [Longyin Wen](http://www.cbsr.ia.ac.cn/users/lywen/), [Xiao Bian](https://sites.google.com/site/cvbian/), [Zhen Lei](http://www.cbsr.ia.ac.cn/users/zlei/), [Stan Z. Li](http://www.cbsr.ia.ac.cn/users/szli/). 
+
+We propose a novel single-shot based detector, called RefineDet, that achieves better accuracy than two-stage methods and maintains comparable efficiency of one-stage methods. You can use the code to train/evaluate the RefineDet method for object detection. For more details, please refer to our [paper](https://arxiv.org/pdf/1711.06897.pdf).
+
+<p align="left">
+<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_structure.jpg" alt="RefineDet Structure" width="777px">
+</p>
+
+| System | VOC2007 test *mAP* | **FPS** (Titan X) | Number of Boxes | Input resolution
+|:-------|:-----:|:-------:|:-------:|:-------:|
+| [Faster R-CNN (VGG16)](https://github.com/ShaoqingRen/faster_rcnn) | 73.2 | 7 | ~6000 | ~1000 x 600 |
+| [YOLO (GoogLeNet)](http://pjreddie.com/darknet/yolo/) | 63.4 | 45 | 98 | 448 x 448 |
+| [YOLOv2 (Darknet-19)](http://pjreddie.com/darknet/yolo/) | 78.6 | 40 | 1445 | 544 x 544 |
+| [SSD300* (VGG16)](https://github.com/weiliu89/caffe/tree/ssd) | 77.2 | 46 | 8732 | 300 x 300 |
+| [SSD512* (VGG16)](https://github.com/weiliu89/caffe/tree/ssd) | 79.8 | 19 | 24564 | 512 x 512 |
+| RefineDet320 (VGG16) | 80.0 | 40 | 6375 | 320 x 320 |
+| RefineDet512 (VGG16) | **81.8** | 24 | 16320 | 512 x 512 |
+
+
+<p align="left">
+<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_results.jpg" alt="RefineDet results on multiple datasets" width="770px">
+</p>
+
 
 # NVCaffe
 
