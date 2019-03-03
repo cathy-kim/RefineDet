@@ -1,8 +1,9 @@
-# Caffe
+# RefineDet Implementation NVCaffe ver.   
+## Single-Shot Refinement Neural Network for Object Detection
 
-Caffe is a deep learning framework made with expression, speed, and modularity in mind.
-It is developed by the Berkeley Vision and Learning Center ([BVLC](http://bvlc.eecs.berkeley.edu))
-and community contributors.
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
+
+By [Shifeng Zhang](http://www.cbsr.ia.ac.cn/users/sfzhang/), [Longyin Wen](http://www.cbsr.ia.ac.cn/users/lywen/), [Xiao Bian](https://sites.google.com/site/cvbian/), [Zhen Lei](http://www.cbsr.ia.ac.cn/users/zlei/), [Stan Z. Li](http://www.cbsr.ia.ac.cn/users/szli/).
 
 # NVCaffe
 
