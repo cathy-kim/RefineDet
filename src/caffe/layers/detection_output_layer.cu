@@ -19,13 +19,13 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_gpu(
     const vector<Blob*>& bottom, const vector<Blob*>& top) {
   const Ftype* loc_data = bottom[0]->gpu_data<Ftype>();
   const Ftype* prior_data = bottom[2]->gpu_data<Ftype>();
-  //@Seojin 
+  //@RefineDet 
   //arm_loc_data related var 
   const Ftype* arm_loc_data = NULL; 
   const int num = bottom[0]->num();
 
 
-  //@Seojin 
+  //@RefineDet 
   //add arm_loc_data
   if(bottom.size() >= 5){
     arm_loc_data = bottom[4]->gpu_data<Ftype>(); 
@@ -37,7 +37,7 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_gpu(
   const bool clip_bbox = false; 
 
 
-  //@Seojin 
+  //@RefineDet 
   //add if-else 
   if(bottom.size()>=5){
   CasRegDecodeBBoxesGPU<Ftype>(loc_count, loc_data, prior_data, code_type_,
@@ -64,7 +64,7 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_gpu(
   // Retrieve all confidences.
   Ftype* conf_permute_data = conf_permute_.mutable_gpu_data();
 
-  //@Seojin 
+  //@RefineDet 
   //add objectness_score 
   if(bottom.size()>=4){
     OSPermuteDataGPU<Ftype>(bottom[1]->count(), bottom[1]->gpu_data<Ftype>(), 

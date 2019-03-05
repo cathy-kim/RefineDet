@@ -7,7 +7,7 @@
 
 namespace caffe {
 
-//@Seojin 
+//@RefineDet 
 //add paramter param 
 template <typename Ftype, typename Btype>
 class ParameterLayer : public Layer<Ftype, Btype> {

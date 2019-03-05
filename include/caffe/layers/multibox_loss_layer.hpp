@@ -23,7 +23,7 @@ namespace caffe {
  *
  */
 
-  //@Seojin
+  //@RefineDet
   //Diff: @DataType 
 template <typename Ftype, typename Btype>
 class MultiBoxLossLayer : public LossLayer<Ftype, Btype> {
@@ -44,7 +44,7 @@ class MultiBoxLossLayer : public LossLayer<Ftype, Btype> {
   // bottom[3] stores the ground truth bounding boxes.
   //@Original 
   //virtual inline int ExactNumBottomBlobs() const { return 4; }
-  //@Seojin
+  //@RefineDet
   //Diff: @Function
   virtual inline int ExactNumBottomBlobs() const { return -1; }
   virtual inline int ExactNumTopBlobs() const { return 1; }

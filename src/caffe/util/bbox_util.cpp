@@ -588,7 +588,7 @@ void DecodeBBoxesAll(const vector<LabelBBox>& all_loc_preds,
 }
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 
 void CasRegDecodeBBoxesAll(const vector<LabelBBox>& all_loc_preds,
@@ -892,7 +892,7 @@ void FindMatches(const vector<LabelBBox>& all_loc_preds,
 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function
 void CasRegFindMatches(const vector<LabelBBox>& all_loc_preds,
       const map<int, vector<NormalizedBBox> >& all_gt_bboxes,
@@ -947,12 +947,12 @@ void CasRegFindMatches(const vector<LabelBBox>& all_loc_preds,
         DecodeBBoxes(prior_bboxes, prior_variances,
                      code_type, encode_variance_in_target, clip_bbox,
                      all_loc_preds[i].find(label)->second, &loc_bboxes);
-        //@Seojin
+        //@RefineDet
         //Diff: @Param: @Check!
         MatchBBox(gt_bboxes, loc_bboxes, label, match_type,
                   overlap_threshold, ignore_cross_boundary_bbox,
                   &match_indices[label], &match_overlaps[label],
-                  //@Seojin 
+                  //@RefineDet 
                   multibox_loss_param.ignore_difficult_gt()
                   );
       }
@@ -978,7 +978,7 @@ void CasRegFindMatches(const vector<LabelBBox>& all_loc_preds,
       MatchBBox(gt_bboxes, decode_prior_bboxes, label, match_type, overlap_threshold,
                 ignore_cross_boundary_bbox, &temp_match_indices,
                 &temp_match_overlaps,
-                 //@Seojin 
+                 //@RefineDet 
                 multibox_loss_param.ignore_difficult_gt()
                 );
       if (share_location) {
@@ -1277,7 +1277,7 @@ template void MineHardExamples<float16>(const Blob& conf_blob,
 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @Param: @Check 
 template <typename Dtype>
 void MineHardExamples(const Blob& conf_blob,
@@ -1333,7 +1333,7 @@ void MineHardExamples(const Blob& conf_blob,
       background_label_id, conf_loss_type, *all_match_indices, all_gt_bboxes,
       &all_conf_loss);
 #else
-  //@Seojin 
+  //@RefineDet 
   //origin: ComputeConfLossGPU 
   //Diff: @Function: @Template
   ComputeConfLossGPU<Dtype>(conf_blob, num, num_priors, num_classes,
@@ -1343,7 +1343,7 @@ void MineHardExamples(const Blob& conf_blob,
   vector<vector<float> > all_loc_loss;
   if (mining_type == MultiBoxLossParameter_MiningType_HARD_EXAMPLE) {
     // Compute localization losses based on matching results.
-    //@Seojin
+    //@RefineDet
     //edit
     TBlob<Dtype> loc_pred, loc_gt;
 
@@ -1398,7 +1398,7 @@ void MineHardExamples(const Blob& conf_blob,
               loss_indices.push_back(std::make_pair(loss[m], m));
               ++num_sel;
               }
-              //@Seojin 
+              //@RefineDet 
               //Diff: @Check: @Log -> too many logs for it
               /*
             else{
@@ -1512,7 +1512,7 @@ template void MineHardExamples<double>(const Blob& conf_blob,
     vector<map<int, vector<int> > >* all_match_indices,
     vector<vector<int> >* all_neg_indices,
   const double* arm_conf_data);
-//@Seojin
+//@RefineDet
 //Diff: @Param: @DataType: @Float16
 //@Check -> arm_conf_data -> flaot16 
 template void MineHardExamples<float16>(const Blob& conf_blob,
@@ -1544,7 +1544,7 @@ void GetGroundTruth(const Dtype* gt_data, const int num_classes, const int num_g
       continue;
     }
     int label = std::round(gt_data[start_idx + 1]);
-    //@Seojin
+    //@RefineDet
     //Diff: @Condition: @Check  
     if (num_classes == 2 && label >= 2){
       label = 1;
@@ -1604,7 +1604,7 @@ void GetGroundTruth(const Dtype* gt_data, const int num_classes, const int num_g
     }
     NormalizedBBox bbox;
     int label = std::round(gt_data[start_idx + 1]);
-    //@Seojin
+    //@RefineDet
     //Diff: @Condition 
      if (num_classes == 2 && label >= 2){
       label = 1;
@@ -1796,7 +1796,7 @@ template void EncodeLocPrediction(const vector<LabelBBox>& all_loc_preds,
 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function
 
 template <typename Dtype>
@@ -1917,7 +1917,7 @@ template void CasRegEncodeLocPrediction(const vector<LabelBBox>& all_loc_preds,
       double* loc_pred_data, double* loc_gt_data,
     const vector<LabelBBox>& all_arm_loc_preds);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @DataType: @Flaot16
 template void CasRegEncodeLocPrediction(const vector<LabelBBox>& all_loc_preds,
       const map<int, vector<NormalizedBBox> >& all_gt_bboxes,
@@ -2034,7 +2034,7 @@ template void GetConfidenceScores(const float16* conf_data, const int num,
 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function
 template <typename Dtype>
 void OSGetConfidenceScores(const Dtype* conf_data,
@@ -2083,7 +2083,7 @@ template void OSGetConfidenceScores(const double* conf_data,
       const int num_preds_per_class, const int num_classes,
       vector<map<int, vector<float> > >* conf_preds,
       float objectness_score);
-//@Seojin
+//@RefineDet
 //Diff: @Function: @Param: @DataType: @Float16
 template void OSGetConfidenceScores(const float16* conf_data,
     const float16* arm_conf_data, const int num,

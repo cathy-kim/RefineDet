@@ -19,7 +19,7 @@ void MultiBoxLossLayer<Ftype, Btype>::LayerSetUp(const vector<Blob*>& bottom,
     this->layer_param_.add_propagate_down(false);
     this->layer_param_.add_propagate_down(false);
   } 
-  //@Seojin 
+  //@RefineDet 
   //MultiBoxLossParameter define 
   const MultiBoxLossParameter& multibox_loss_param =
       this->layer_param_.multibox_loss_param();
@@ -165,7 +165,7 @@ void MultiBoxLossLayer<Ftype, Btype>::Reshape(const vector<Blob*>& bottom,
   all_neg_indices_.clear();
 }
 
-//@Seojin 
+//@RefineDet 
 //add function
 template <typename Ftype, typename Btype>
 void MultiBoxLossLayer<Ftype, Btype>::Forward_cpu(const vector<Blob*>& bottom,
@@ -175,7 +175,7 @@ void MultiBoxLossLayer<Ftype, Btype>::Forward_cpu(const vector<Blob*>& bottom,
   const Dtype* prior_data = bottom[2]->cpu_data<Dtype>();
   const Dtype* gt_data = bottom[3]->cpu_data<Dtype>();
 
-  //@Seojin 
+  //@RefineDet 
   //add arm related variables
   const Dtype* arm_conf_data = NULL;
   const Dtype* arm_loc_data = NULL;
@@ -215,7 +215,7 @@ void MultiBoxLossLayer<Ftype, Btype>::Forward_cpu(const vector<Blob*>& bottom,
                     &all_loc_preds);
 
   // Find matches between source bboxes and ground truth bboxes.
-  //@Seojin 
+  //@RefineDet 
   //add if-else and CasRegFindMatches 
   vector<map<int, vector<float> > > all_match_overlaps;
   if (bottom.size() >= 6) {
@@ -235,7 +235,7 @@ void MultiBoxLossLayer<Ftype, Btype>::Forward_cpu(const vector<Blob*>& bottom,
   num_matches_ = 0;
   int num_negs = 0;
   // Sample hard negative (and positive) examples based on mining type.
-  //@Seojin 
+  //@RefineDet 
   //MineHard -> arm_conf_data 
   MineHardExamples<Dtype>(*bottom[1],
       all_loc_preds, all_gt_bboxes, prior_bboxes,
@@ -253,7 +253,7 @@ void MultiBoxLossLayer<Ftype, Btype>::Forward_cpu(const vector<Blob*>& bottom,
     Dtype* loc_pred_data = loc_pred_->mutable_cpu_data<Dtype>();
     Dtype* loc_gt_data = loc_gt_->mutable_cpu_data<Dtype>(); 
 
-    //@Seojin
+    //@RefineDet
     //add CasReg~ & if-else 
 
     if(bottom.size()>=6){

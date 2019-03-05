@@ -190,7 +190,7 @@ __global__ void DecodeBBoxesKernel(const int nthreads,
   }
 }
 
-//@Seojin
+//@RefineDet
 //Diff: @Function
 template <typename Dtype>
 __global__ void CasRegDecodeBBoxesKernel(const int nthreads,
@@ -308,7 +308,7 @@ __global__ void CasRegDecodeBBoxesKernel(const int nthreads,
 }
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @Param: @Check!
 template <typename Dtype>
 void CasRegDecodeBBoxesGPU(const int nthreads,
@@ -331,7 +331,7 @@ void CasRegDecodeBBoxesGPU(const int nthreads,
       variance_encoded_in_target, num_priors, share_location, num_loc_classes,
       background_label_id, clip_bbox, bbox_data);
   CUDA_POST_KERNEL_CHECK;
-  //@Seojin
+  //@RefineDet
   CUDA_CHECK(cudaStreamSynchronize(stream));
 }
 //end
@@ -351,7 +351,7 @@ template void CasRegDecodeBBoxesGPU(const int nthreads,
           const int num_loc_classes, const int background_label_id,
           const bool clip_bbox, double* bbox_data, const double* arm_loc_data);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @Param: @DataType: @Float16
 template void CasRegDecodeBBoxesGPU(const int nthreads,
           const float16* loc_data, const float16* prior_data,
@@ -438,7 +438,7 @@ template void PermuteDataGPU(const int nthreads,
           const float16* data, const int num_classes, const int num_data,
           const int num_dim, float16* new_data);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @OS: @Param 
 
 template <typename Dtype>
@@ -468,14 +468,14 @@ __global__ void OSPermuteDataKernel(const int nthreads,
 //end
 
 
-//@Seojin 
+//@RefineDet 
 //Diff: @Function: @OS: @Param
 template <typename Dtype>
 void OSPermuteDataGPU(const int nthreads,
           const Dtype* data, const Dtype* arm_data, const int num_classes, const int num_data,
           const int num_dim, Dtype* new_data, float objectness_score) {
   // NOLINT_NEXT_LINE(whitespace/operators)
-  //@Seojin
+  //@RefineDet
   //Diff: @Var
   cudaStream_t stream = Caffe::thread_stream();
   //Diff: @Param: @stream,0
@@ -483,7 +483,7 @@ void OSPermuteDataGPU(const int nthreads,
       CAFFE_CUDA_NUM_THREADS,0,stream>>>(nthreads, data, arm_data, num_classes, num_data,
       num_dim, new_data, objectness_score);
   CUDA_POST_KERNEL_CHECK;
-  //@Seojin
+  //@RefineDet
   //Diff: @Function
   CUDA_CHECK(cudaStreamSynchronize(stream));
 }
@@ -495,7 +495,7 @@ template void OSPermuteDataGPU(const int nthreads,
           const double* data, const double* arm_data, const int num_classes, const int num_data,
           const int num_dim, double* new_data, float objectness_score);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function: @OS: @Param: @Float16
 template void OSPermuteDataGPU(const int nthreads,
           const float16* data, const float16* arm_data, const int num_classes, const int num_data,

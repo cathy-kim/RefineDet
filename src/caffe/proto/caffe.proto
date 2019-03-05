@@ -687,7 +687,7 @@ message LayerParameter {
   optional NormalizeParameter norm_param = 206;
   optional PermuteParameter permute_param = 202;
   optional PoolingParameter pooling_param = 121;
-  //@Seojin 
+  //@RefineDet 
   //Diff: @Var: @Param
   optional ParameterParameter parameter_param = 154;
   //end 
@@ -1411,7 +1411,7 @@ message DetectionOutputParameter {
   optional string save_file = 12;
   //the objectness score is used for the anchor refinement module to filter easy negative anchor. by 
   //RefineDet
-  //@Seojin
+  //@RefineDet
   optional float objectness_score = 24 [default = 0.01];
 }
 
@@ -1713,7 +1713,7 @@ message MultiBoxLossParameter {
   optional int32 sample_size = 22 [default = 64];
   optional bool use_prior_for_nms = 23 [default = false];
   optional bool ignore_difficult_gt = 24 [default = false];
-  //@Seojin 
+  //@RefineDet 
   //RefineDet
   optional float objectness_score = 25 [default = 0.01];
 }
@@ -1740,7 +1740,7 @@ message NormalizeParameter {
   optional float eps = 4 [default = 1e-10];
 }
 
-//@Seojin
+//@RefineDet
 //Diff: @Var
 message ParameterParameter {
   optional BlobShape shape = 1;

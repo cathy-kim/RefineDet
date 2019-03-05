@@ -48,7 +48,7 @@ class DetectionOutputLayer : public Layer<Ftype, Btype> {
   virtual inline int MinBottomBlobs() const { return 3; }
   //@Original
   //virtual inline int MaxBottomBlobs() const { return 4; }
-  //@Seojin
+  //@RefineDet
   //Diff: @Param 
   virtual inline int MaxBottomBlobs() const { return 5; }
   virtual inline int ExactNumTopBlobs() const { return 1; }
@@ -83,7 +83,7 @@ class DetectionOutputLayer : public Layer<Ftype, Btype> {
     NOT_IMPLEMENTED;
   }
 
-  //@Seojin
+  //@RefineDet
   //Diff: @Var 
   float objectness_score_;
   //end
@@ -122,7 +122,7 @@ class DetectionOutputLayer : public Layer<Ftype, Btype> {
   bool visualize_;
   float visualize_threshold_;
 
-  //@Seojin
+  //@RefineDet
   //Diff: @DataType
   //Blob<Dtype> -> Tblob<Ftype> 
   shared_ptr<DataTransformer<Ftype>> data_transformer_;

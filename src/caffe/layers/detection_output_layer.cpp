@@ -12,7 +12,7 @@
 
 namespace caffe {
 
-//@Seojin 
+//@RefineDet 
 // add objectness_score 
 template <typename Ftype, typename Btype>
 void DetectionOutputLayer<Ftype, Btype>::LayerSetUp(const vector<Blob*>& bottom,
@@ -178,7 +178,7 @@ void DetectionOutputLayer<Ftype, Btype>::Reshape(const vector<Blob*>& bottom,
   top[0]->Reshape(top_shape);
 }
 
-//@Seojin 
+//@RefineDet 
 //@edit 
 template <typename Ftype, typename Btype>
 void DetectionOutputLayer<Ftype, Btype>::Forward_cpu(
@@ -187,7 +187,7 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_cpu(
   const Ftype* conf_data = bottom[1]->cpu_data<Ftype>();
   const Ftype* prior_data = bottom[2]->cpu_data<Ftype>();
   const int num = bottom[0]->num();
-  //@Seojin 
+  //@RefineDet 
   //add arm 
   const Ftype* arm_conf_data = NULL;
   const Ftype* arm_loc_data = NULL;
@@ -210,7 +210,7 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_cpu(
 
   // Retrieve all confidences.
   vector<map<int, vector<float> > > all_conf_scores;
-   //@Seojin 
+   //@RefineDet 
   //add else-if and OSGetConfidence 
   if(arm_conf_data != NULL){
      OSGetConfidenceScores(conf_data, arm_conf_data, num, num_priors_, num_classes_,
@@ -229,7 +229,7 @@ void DetectionOutputLayer<Ftype, Btype>::Forward_cpu(
   // Decode all loc predictions to bboxes.
   vector<LabelBBox> all_decode_bboxes;
   const bool clip_bbox = false;
-  // @Seojin
+  // @RefineDet
   // CasReg 
   if (bottom.size() >= 5) {
   CasRegDecodeBBoxesAll(all_loc_preds, prior_bboxes, prior_variances, num,

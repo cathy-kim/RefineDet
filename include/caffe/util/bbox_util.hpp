@@ -135,7 +135,7 @@ void DecodeBBoxesAll(const vector<LabelBBox>& all_loc_pred,
     const bool clip, vector<LabelBBox>* all_decode_bboxes);
 
 
-//@Seojin 
+//@RefineDet 
 //Diff: @Function
 void CasRegDecodeBBoxesAll(const vector<LabelBBox>& all_loc_pred,
     const vector<NormalizedBBox>& prior_bboxes,
@@ -178,7 +178,7 @@ void FindMatches(const vector<LabelBBox>& all_loc_preds,
 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 void CasRegFindMatches(const vector<LabelBBox>& all_loc_preds,
       const map<int, vector<NormalizedBBox> >& all_gt_bboxes,
@@ -224,7 +224,7 @@ void MineHardExamples(const Blob& conf_blob,
     vector<map<int, vector<int> > >* all_match_indices,
     vector<vector<int> >* all_neg_indices);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 template <typename Dtype>
 void MineHardExamples(const Blob& conf_blob,
@@ -296,7 +296,7 @@ void EncodeLocPrediction(const vector<LabelBBox>& all_loc_preds,
       Dtype* loc_pred_data, Dtype* loc_gt_data);
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 template <typename Dtype>
 void CasRegEncodeLocPrediction(const vector<LabelBBox>& all_loc_preds,
@@ -336,7 +336,7 @@ void GetConfidenceScores(const Dtype* conf_data, const int num,
       const int num_preds_per_class, const int num_classes,
       vector<map<int, vector<float> > >* conf_scores);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 template <typename Dtype>
 void OSGetConfidenceScores(const Dtype* conf_data, const Dtype* arm_conf_data,
@@ -363,7 +363,7 @@ void GetConfidenceScores(const Dtype* conf_data, const int num,
       const bool class_major, vector<map<int, vector<float> > >* conf_scores); 
 
 
-//@Seojin
+//@RefineDet
 //Diff: @Function, @!Check 
 template <typename Dtype>
 void OSGetConfidenceScores(const Dtype* conf_data, const Dtype* arm_conf_data,
@@ -565,7 +565,7 @@ void DecodeBBoxesGPU(const int nthreads,
           const int num_loc_classes, const int background_label_id,
           const bool clip_bbox, Dtype* bbox_data);
 
-//@Seojin
+//@RefineDet
 //Diff: @Function 
 template <typename Dtype>
 void CasRegDecodeBBoxesGPU(const int nthreads,
@@ -581,7 +581,7 @@ void PermuteDataGPU(const int nthreads,
           const Dtype* data, const int num_classes, const int num_data,
           const int num_dim, Dtype* new_data);
 
-//@Seojin 
+//@RefineDet 
 //Diff: @Function
 template <typename Dtype>
 void OSPermuteDataGPU(const int nthreads,
@@ -608,7 +608,7 @@ void ApplyNMSGPU(const Dtype* bbox_data, const Dtype* conf_data,
           const int num_bboxes, const float confidence_threshold,
           const int top_k, const float nms_threshold, vector<int>* indices);
 
-//@Seojin
+//@RefineDet
 //Diff: @DataType: Blob->TBlob
 template <typename Dtype>
 void GetDetectionsGPU(const Dtype* bbox_data, const Dtype* conf_data,
