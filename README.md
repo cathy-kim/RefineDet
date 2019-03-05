@@ -111,7 +111,7 @@ We have accumulated the following to-do list, which we hope to complete in the n
 
 ## References
 - [Original Implementation (CAFFE)](https://github.com/sfzhang15/RefineDet)
-- [NVCAFFE)](https://github.com/nvidia/caffe)
+- [NVCAFFE](https://github.com/nvidia/caffe)
 - A list of other great SSD ports that were sources of Readme.md:
   * [luuuyi/RefineDet.PyTorch](https://github.com/luuuyi/RefineDet.PyTorch/edit/master/README.md
 )
