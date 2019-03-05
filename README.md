@@ -1,4 +1,4 @@
-A NVCaffe[NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). This code is based on NVCaffe version 17.0.2. The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
+A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). This code is based on NVCaffe version 17.0.2. The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
 
 ### Table of Contents
 - <a href='#performance'>Performance</a>
