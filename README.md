@@ -1,30 +1,120 @@
-# Single-Shot Refinement Neural Network for Object Detection(RefineDet) NVCaffe ver. 
-
-[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
-
-By [Shifeng Zhang](http://www.cbsr.ia.ac.cn/users/sfzhang/), [Longyin Wen](http://www.cbsr.ia.ac.cn/users/lywen/), [Xiao Bian](https://sites.google.com/site/cvbian/), [Zhen Lei](http://www.cbsr.ia.ac.cn/users/zlei/), [Stan Z. Li](http://www.cbsr.ia.ac.cn/users/szli/). 
-
-We propose a novel single-shot based detector, called RefineDet, that achieves better accuracy than two-stage methods and maintains comparable efficiency of one-stage methods. You can use the code to train/evaluate the RefineDet method for object detection. For more details, please refer to our [paper](https://arxiv.org/pdf/1711.06897.pdf).
-
-<p align="left">
-<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_structure.jpg" alt="RefineDet Structure" width="777px">
-</p>
-
-| System | VOC2007 test *mAP* | **FPS** (Titan X) | Number of Boxes | Input resolution
-|:-------|:-----:|:-------:|:-------:|:-------:|
-| [Faster R-CNN (VGG16)](https://github.com/ShaoqingRen/faster_rcnn) | 73.2 | 7 | ~6000 | ~1000 x 600 |
-| [YOLO (GoogLeNet)](http://pjreddie.com/darknet/yolo/) | 63.4 | 45 | 98 | 448 x 448 |
-| [YOLOv2 (Darknet-19)](http://pjreddie.com/darknet/yolo/) | 78.6 | 40 | 1445 | 544 x 544 |
-| [SSD300* (VGG16)](https://github.com/weiliu89/caffe/tree/ssd) | 77.2 | 46 | 8732 | 300 x 300 |
-| [SSD512* (VGG16)](https://github.com/weiliu89/caffe/tree/ssd) | 79.8 | 19 | 24564 | 512 x 512 |
-| RefineDet320 (VGG16) | 80.0 | 40 | 6375 | 320 x 320 |
-| RefineDet512 (VGG16) | **81.8** | 24 | 16320 | 512 x 512 |
+A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
 
 
-<p align="left">
-<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_results.jpg" alt="RefineDet results on multiple datasets" width="770px">
-</p>
+### Table of Contents
+- <a href='#performance'>Performance</a>
+- <a href='#installation'>Installation</a>
+- <a href='#datasets'>Datasets</a>
+- <a href='#training-refinedet'>Train</a>
+- <a href='#evaluation'>Evaluate</a>
+- <a href='#todo'>Future Work</a>
+- <a href='#references'>Reference</a>
 
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+## Performance
+This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0ver. 
+
+#### VOC2007 Test 
+
+##### mAP (*Single Scale Test*)
+
+| Arch | Paper | Caffe Version | Our NVCaffe Version |
+|:-:|:-:|:-:|:-:|
+| RefineDet320 | 80.0% | 79.52% | 79.98% |
+| RefineDet512 | 81.8% | 81.85% | 81.8% | 
+| RefineDet320 from Scratch | - | - | 72.31% |
+
+
+
+
+## Installation
+- Clone this repository.
+  * Note: We currently only support Python 3+.
+- Then download the dataset by following the [instructions](#datasets) below.
+- We now support [Visdom](https://github.com/facebookresearch/visdom) for real-time loss visualization during training!
+  * To use Visdom in the browser:
+  ```Shell
+  # First install Python server and client
+  pip install visdom
+  # Start the server (probably in a screen or tmux)
+  python -m visdom.server
+  ```
+  * Then (during training) navigate to http://localhost:8097/ (see the Train section below for training details).
+- Note: For training, we currently support [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) and [COCO](http://mscoco.org/), and aim to add [ImageNet](http://www.image-net.org/) support soon.
+
+## Datasets
+To make things easy, we provide bash scripts to handle the dataset downloads and setup for you.  We also provide simple dataset loaders that inherit `torch.utils.data.Dataset`, making them fully compatible with the `torchvision.datasets` [API](http://pytorch.org/docs/torchvision/datasets.html).
+
+
+### COCO
+Microsoft COCO: Common Objects in Context
+
+##### Download COCO 2014
+```Shell
+# specify a directory for dataset to be downloaded into, else default is ~/data/
+sh data/scripts/COCO2014.sh
+```
+
+### VOC Dataset
+PASCAL VOC: Visual Object Classes
+
+##### Download VOC2007 trainval & test
+```Shell
+# specify a directory for dataset to be downloaded into, else default is ~/data/
+sh data/scripts/VOC2007.sh # <directory>
+```
+
+##### Download VOC2012 trainval
+```Shell
+# specify a directory for dataset to be downloaded into, else default is ~/data/
+sh data/scripts/VOC2012.sh # <directory>
+```
+
+## Training RefineDet
+- First download the fc-reduced [VGG-16](https://arxiv.org/abs/1409.1556) PyTorch base network weights at:              https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
+- By default, we assume you have downloaded the file in the `RefineDet.PyTorch/weights` dir:
+
+```Shell
+mkdir weights
+cd weights
+wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
+```
+
+- To train RefineDet320 or RefineDet512 using the train scripts `train_refinedet320.sh` and `train_refinedet512.sh`. You can manually change them as you want.
+
+```Shell
+./train_refinedet320.sh  #./train_refinedet512.sh
+```
+
+- Note:
+  * For training, an NVIDIA GPU is strongly recommended for speed.
+  * For instructions on Visdom usage/installation, see the <a href='#installation'>Installation</a> section.
+  * You can pick-up training from a checkpoint by specifying the path as one of the training parameters (again, see `train_refinedet.py` for options)
+
+## Evaluation
+To evaluate a trained network:
+
+```Shell
+./eval_refinedet.sh
+```
+
+You can specify the parameters listed in the `eval_refinedet.py` file by flagging them or manually changing them.  
+
+## TODO
+We have accumulated the following to-do list, which we hope to complete in the near future
+- Still to come:
+  * [ ] Support for multi-scale testing
+
+## References
+- [Original Implementation (CAFFE)](https://github.com/sfzhang15/RefineDet)
+- [NVCAFFE)](https://github.com/nvidia/caffe)
+- A list of other great SSD ports that were sources of Readme.md:
+  * [luuuyi/RefineDet.PyTorch](https://github.com/luuuyi/RefineDet.PyTorch/edit/master/README.md
+)
 
 # NVCaffe
 
