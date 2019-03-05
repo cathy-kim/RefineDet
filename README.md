@@ -1,4 +1,4 @@
-A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
+A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). This code is based on NVCaffe version 17.0.2. The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
 
 
 ### Table of Contents
@@ -31,7 +31,6 @@ This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0
 
 ## Installation
 - Clone this repository.
-  * Note: We currently only support Python 3+.
 - Then download the dataset by following the [instructions](#datasets) below.
   * Then (during training) navigate to http://localhost:8097/ (see the Train section below for training details).
 - Note: For training, we currently support [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) and [COCO](http://mscoco.org/), and aim to add [ImageNet](http://www.image-net.org/) support soon.
