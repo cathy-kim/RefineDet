@@ -40,8 +40,7 @@ make pycaffe
 - By default, we assume you have downloaded the file in the `RefineDet.PyTorch/weights` dir:
 
 ```Shell
-mkdir weights
-cd weights
+cd models/VGGNet
 wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 ```
 
