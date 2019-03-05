@@ -1,6 +1,5 @@
 A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation of [Single-Shot Refinement Neural Network for Object Detection](https://arxiv.org/abs/1711.06897 ). This code is based on NVCaffe version 17.0.2. The official and original Caffe code can be found [here](https://github.com/sfzhang15/RefineDet). 
 
-
 ### Table of Contents
 - <a href='#performance'>Performance</a>
 - <a href='#installation'>Installation</a>
@@ -16,7 +15,7 @@ A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation o
 &nbsp;
 
 ## Performance
-This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0 
+This code is verified on 1080ti, Ubuntu 16.04 LTS 64bit, CUDA 9.0 and cudnn 7.0. 
 
 #### VOC2007 Test 
 
