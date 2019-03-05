@@ -26,7 +26,7 @@ This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0
 |:-:|:-:|:-:|:-:|
 | RefineDet320 | 80.0% | 79.52% | 79.98% |
 | RefineDet512 | 81.8% | 81.85% | 81.8% | 
-| RefineDet320 from Scratch | - | - | 72.31% |
+| RefineDet320 from Scratch | - | - | 72.27% |
 
 
 ## Installation
@@ -36,21 +36,6 @@ This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0
 ```Shell
 make -j{cpu_core_num} all 
 make pycaffe
-```
-
-### VOC Dataset
-PASCAL VOC: Visual Object Classes
-
-##### Download VOC2007 trainval & test
-```Shell
-# specify a directory for dataset to be downloaded into, else default is ~/data/
-sh data/scripts/VOC2007.sh # <directory>
-```
-
-##### Download VOC2012 trainval
-```Shell
-# specify a directory for dataset to be downloaded into, else default is ~/data/
-sh data/scripts/VOC2012.sh # <directory>
 ```
 
 ## Training RefineDet
@@ -66,13 +51,13 @@ wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 - To train RefineDet320 or RefineDet512 using the train scripts `train_refinedet320.sh` and `train_refinedet512.sh`. You can manually change them as you want.
 
 ```Shell
-./train_refinedet320.sh  
+./refinedet_train.sh  
 ```
 
 - Note:
   * For training, an NVIDIA GPU is strongly recommended for speed.
   * For instructions on Visdom usage/installation, see the <a href='#installation'>Installation</a> section.
-  * You can pick-up training from a checkpoint by specifying the path as one of the training parameters (again, see `train_refinedet.py` for options)
+
 
 ## Evaluation
 To evaluate a trained network:
@@ -80,8 +65,6 @@ To evaluate a trained network:
 ```Shell
 python test/test_refinedet.py 
 ```
-
-You can specify the parameters listed in the `eval_refinedet.py` file by flagging them or manually changing them.  
 
 ## TODO
 We have accumulated the following to-do list, which we hope to complete in the near future
