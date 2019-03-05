@@ -32,17 +32,10 @@ This code is verified on Ubuntu 16.04 LTS 64bit,CUDA 9.0 and cudnn 7.0
 ## Installation
 - Clone this repository.
 - Then download the dataset by following the [instructions](#datasets) below.
-  * Then (during training) navigate to http://localhost:8097/ (see the Train section below for training details).
-- Note: For training, we currently support [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) and [COCO](http://mscoco.org/), and aim to add [ImageNet](http://www.image-net.org/) support soon.
 
-
-### COCO
-Microsoft COCO: Common Objects in Context
-
-##### Download COCO 2014
 ```Shell
-# specify a directory for dataset to be downloaded into, else default is ~/data/
-sh data/scripts/COCO2014.sh
+make -j{cpu_core_num} all 
+make pycaffe
 ```
 
 ### VOC Dataset
@@ -73,7 +66,7 @@ wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 - To train RefineDet320 or RefineDet512 using the train scripts `train_refinedet320.sh` and `train_refinedet512.sh`. You can manually change them as you want.
 
 ```Shell
-./train_refinedet320.sh  #./train_refinedet512.sh
+./train_refinedet320.sh  
 ```
 
 - Note:
@@ -85,7 +78,7 @@ wget https://s3.amazonaws.com/amdegroot-models/vgg16_reducedfc.pth
 To evaluate a trained network:
 
 ```Shell
-./eval_refinedet.sh
+python test/test_refinedet.py 
 ```
 
 You can specify the parameters listed in the `eval_refinedet.py` file by flagging them or manually changing them.  
