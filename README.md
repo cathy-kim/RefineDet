@@ -12,8 +12,6 @@ A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation o
 &nbsp;
 &nbsp;
 &nbsp;
-&nbsp;
-
 ## Performance
 This code is verified on 1080ti, Ubuntu 16.04 LTS 64bit, CUDA 9.0 and cudnn 7.0. 
 
@@ -66,9 +64,7 @@ python test/test_refinedet.py
 ```
 
 ## TODO
-We have accumulated the following to-do list, which we hope to complete in the near future
-- Still to come:
-  * [ ] Support for multi-scale testing
+
 
 ## References
 - [Original Implementation (CAFFE)](https://github.com/sfzhang15/RefineDet)
