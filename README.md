@@ -13,7 +13,7 @@ A higher performance [NVCaffe](https://github.com/nvidia/caffe) implementation o
 &nbsp;
 &nbsp;
 ## Performance
-This code is verified on 1080ti, Ubuntu 16.04 LTS 64bit, CUDA 9.0 and cudnn 7.0. 
+This code is verified on Ubuntu 16.04 LTS 64bit, CUDA 9.0 and cudnn 7.0. 
 
 #### VOC2007 Test 
 
